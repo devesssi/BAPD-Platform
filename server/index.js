@@ -265,7 +265,12 @@ if (process.env.VERCEL !== '1') {
   app.get('/{*splat}', (req, res) => res.sendFile(path.join(dist, 'index.html')));
 } else {
   const deployedIndex = path.resolve(process.cwd(), 'public/index.html');
+  const deployedAssets = path.resolve(process.cwd(), 'public/assets');
   app.get('/', (_req, res) => res.sendFile(deployedIndex));
+  app.get('/assets/:asset', (req, res, next) => {
+    const asset = path.resolve(deployedAssets, path.basename(req.params.asset));
+    res.sendFile(asset, error => { if (error) next(error); });
+  });
 }
 app.use((err, _req, res, _next) => {
   console.error('BAPD request failed:', err?.message || 'unknown error');
