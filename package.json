@@ -1,0 +1,26 @@
+{
+  "name": "bapd-mini-project",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"npm:server\" \"npm:client\"",
+    "server": "node --env-file-if-exists=.env.local --env-file-if-exists=.env server/local.js",
+    "client": "vite --host 0.0.0.0",
+    "build": "vite build && node scripts/sync-vercel-assets.js",
+    "start": "node --env-file-if-exists=.env.local --env-file-if-exists=.env server/local.js",
+    "db:migrate:turso": "node --env-file-if-exists=.env.local --env-file-if-exists=.env scripts/migrate-local-to-turso.js"
+  },
+  "dependencies": {
+    "@clerk/express": "^2.1.85",
+    "@clerk/react": "^6.18.3",
+    "@libsql/client": "^0.18.0",
+    "@vitejs/plugin-react": "latest",
+    "concurrently": "latest",
+    "express": "latest",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "vite": "latest"
+  }
+}

@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import path from 'node:path';
+const root=process.cwd();
+const dist=path.join(root,'dist');
+const publicDir=path.join(root,'public');
+const sourceAssets=path.join(dist,'assets');
+const publicAssets=path.join(publicDir,'assets');
+if(!fs.existsSync(path.join(dist,'index.html'))) throw new Error('Run vite build before copying Vercel assets.');
+fs.mkdirSync(publicDir,{recursive:true});
+fs.rmSync(publicAssets,{recursive:true,force:true});
+fs.cpSync(sourceAssets,publicAssets,{recursive:true});
+fs.copyFileSync(path.join(dist,'index.html'),path.join(publicDir,'index.html'));
+console.log('Prepared Vercel static assets in public/.');

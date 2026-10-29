@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+.env.local
+server/*.sqlite
+public/index.html
+public/assets/
+.env.*
+!.env.example
+server/*.sqlite*
+tmp/
+Mini_project1.pdf
+.vercel/
+requirements.txt
