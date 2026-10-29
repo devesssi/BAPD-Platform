@@ -263,6 +263,9 @@ if (process.env.VERCEL !== '1') {
   const dist = path.resolve(__dirname, '../dist');
   app.use(express.static(dist));
   app.get('/{*splat}', (req, res) => res.sendFile(path.join(dist, 'index.html')));
+} else {
+  const deployedIndex = path.resolve(process.cwd(), 'public/index.html');
+  app.get('/', (_req, res) => res.sendFile(deployedIndex));
 }
 app.use((err, _req, res, _next) => {
   console.error('BAPD request failed:', err?.message || 'unknown error');
